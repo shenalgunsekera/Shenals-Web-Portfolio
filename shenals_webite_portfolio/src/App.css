@@ -31,7 +31,7 @@ html {
 
 body {
   font-weight: 400;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   background-color: #121212 !important;
   color: white !important;
@@ -315,7 +315,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   margin-top: -60px;
 }
 .skill h2 {
-	font-size: 45px;
+	font-size: 40px;
 	font-weight: 700;
 }
 .skill p {
@@ -617,4 +617,11 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: #B8B8B8;
   letter-spacing: 0.5px;
   margin-top: 20px;
+}
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+  background: transparent;
+  position: relative;
 }
