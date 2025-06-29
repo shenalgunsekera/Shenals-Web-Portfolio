@@ -602,7 +602,7 @@ const ContactForm = () => {
 
   // EmailJS Configuration - Replace these with your actual values
   const EMAILJS_CONFIG = {
-    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_qr9iyu6',
+    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_xkdwu0t',
     templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_z70ih5p',
     publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'bYa9JNcVpGNhyqbMV'
   };
