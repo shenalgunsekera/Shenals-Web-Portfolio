@@ -1,0 +1,326 @@
+/* Reset & base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base theme colors - apply to body */
+body.light-mode {
+  --background-color-body: #f8f8f8; /* Light background */
+  --text-color-body: #333; /* Dark text */
+  --menu-overlay-background: rgba(255, 255, 255, 0.98); /* Light overlay */
+  --menu-link-color: #333; /* Dark links in overlay */
+  --menu-info-color: #555; /* Darker info text */
+  --menu-bar-icon-color-light-mode: #000; /* LOGO, HAMBURGER, CLOSE in LIGHT mode will be black */
+  --menu-bar-icon-color-dark-mode-toggle: #000; /* MOON TOGGLE in LIGHT mode (click to go dark) will be black */
+}
+
+body.dark-mode {
+  --background-color-body: #1a1a1a; /* Dark background */
+  --text-color-body: #f0f0f0; /* Light text */
+  --menu-overlay-background: rgba(37, 36, 36, 0.98); /* Dark overlay */
+  --menu-link-color: #fff; /* Light links in overlay */
+  --menu-info-color: #ccc; /* Lighter info text */
+  --menu-bar-icon-color-light-mode: #fff; /* LOGO, HAMBURGER, CLOSE in DARK mode will be white */
+  --menu-bar-icon-color-dark-mode-toggle: #fff; /* SUN TOGGLE in DARK mode (click to go light) will be white */
+}
+
+/* Apply base colors from variables */
+body {
+  background-color: var(--background-color-body);
+  color: var(--text-color-body);
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.menu-container {
+  width: 100px;
+  position: relative;
+}
+
+/* Menu Bar */
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 3em;
+  background: transparent;
+  pointer-events: auto;
+  font-size: medium;
+  font-weight: 900;
+}
+
+.menu-logo a {
+  color: var(--menu-bar-icon-color-light-mode);
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.menu-logo a:hover { /* Added hover effect for logo */
+    color: #764ba2;
+}
+
+/* Wrapper for mode toggle and menu button */
+.menu-actions {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  gap: 1.5em; /* Space between mode toggle and menu button */
+}
+
+/* Styles for Dark/Light Mode Toggle Button */
+.mode-toggle {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  font-size: 2em; /* Adjust size as needed */
+}
+
+/* Specific color for the mode toggle icon based on the current body theme */
+body.light-mode .mode-toggle {
+  color: var(--menu-bar-icon-color-dark-mode-toggle); /* Moon icon (light mode) will be black */
+}
+
+body.dark-mode .mode-toggle {
+  color: var(--menu-bar-icon-color-dark-mode-toggle); /* Sun icon (dark mode) will be white */
+}
+
+.mode-toggle p {
+  line-height: 1; /* Ensures character is vertically centered */
+  margin: 0;
+}
+
+.mode-toggle:hover {
+  color: #764ba2; /* Hover color for mode toggle */
+}
+
+/* Menu Open Button (Hamburger) */
+.menu-open p {
+  color: var(--menu-bar-icon-color-light-mode);
+  font-weight: 700;
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.menu-open p:hover {
+  color: #764ba2; /* Hover color */
+}
+
+/* Menu Close Button (X icon) */
+.menu-close-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 2.2em;
+  font-weight: 900;
+  user-select: none;
+  transition: color 0.2s;
+  color: var(--menu-bar-icon-color-light-mode);
+}
+.menu-close-icon p {
+  font-size: 1em;
+  color: inherit;
+  line-height: 1;
+  margin: 0;
+}
+
+.menu-close-icon:hover {
+  color: #764ba2; /* Hover color for close icon */
+}
+
+/* Overlay */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background: var(--menu-overlay-background);
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  padding: 3em 4em 2em 4em;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+  transition: background 0.3s;
+}
+
+/* Main Links Centered & Large */
+.menu-copy {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex: 1 0 auto;
+  min-height: 0;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  padding-top: 3%;
+  padding-left: 4%;
+  padding-bottom: 15px;
+  gap: 0.4em;
+  width: 100%;
+  margin-bottom: 2.5vw;
+}
+
+.menu-link-item {
+  width: max-content;
+}
+
+.menu-link-item-holder {
+  position: relative;
+  /* Ensure the children (chars) are positioned correctly relative to this holder */
+  display: inline-block; /* Or block, depending on desired layout */
+  overflow: hidden; /* Hide chars that move out of bounds */
+}
+
+.menu-link-item-holder a {
+  color: var(--menu-link-color);
+  font-size: 4vw;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-decoration: none;
+  /* Removed direct transition: color 0.2s; as GSAP will handle animations */
+  white-space: nowrap;
+  display: inline-block; /* Crucial for child span elements */
+}
+
+/* Style for individual characters (spans) inside the links */
+.menu-link-char {
+  display: inline-block; /* Each character needs to be an inline-block for transforms */
+  transform-origin: bottom center; /* Important for rotation effect */
+  transition: color 0.2s; /* Allow color transition on hover */
+}
+
+.menu-link-item-holder:hover .menu-link-char {
+  color: #764ba2; /* Apply hover color to individual characters */
+}
+
+
+/* Bottom Row: Info and Preview */
+.menu-bottom-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2em;
+  padding-bottom: 2em;
+}
+
+.menu-info {
+  display: flex;
+  flex-direction: row;
+  gap: 15em;
+  font-weight: lighter;
+}
+
+.menu-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+
+.menu-info-col a {
+  color: var(--menu-info-color);
+  font-size: 1.2em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.menu-info-col a:hover {
+  color: #764ba2;
+}
+
+.menu-info-col p {
+  color: var(--menu-info-color);
+  font-size: 1.1em;
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .menu-bar {
+    padding: 1.2em 1.5em;
+  }
+  .menu-overlay {
+    padding: 2em 1.2em 1em 1.2em;
+  }
+  .menu-link-item-holder a {
+    font-size: 2.5em; /* Adjusted for better legibility on smaller screens */
+  }
+  .menu-links {
+    padding-top: 10%;
+    padding-left: 0;
+    margin-bottom: 0.5em;
+  }
+  .menu-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5em;
+    padding-bottom: 1em;
+  }
+  .menu-info {
+    font-size: small;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+}
+
+/* Responsive */
+@media (max-width: 756px) {
+  .menu-bar {
+    padding: 1.2em 1.5em;
+  }
+  .menu-overlay {
+    padding: 2em 1.2em 1em 1.2em;
+  }
+  .menu-link-item-holder a {
+    font-size: 2em;
+  }
+  .menu-links {
+    padding-top: 10%;
+    margin-bottom: 0.5em;
+  }
+  .menu-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5em;
+    padding-bottom: 1em;
+  }
+  .menu-info {
+    font-size: small;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+}
+
+/* CV Download Button */
+.cv-download {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  font-size: 1.8em;
+}
+
+.cv-download:hover {
+  color: #764ba2; /* Hover color for CV download */
+  transform: scale(1.1);
+}
