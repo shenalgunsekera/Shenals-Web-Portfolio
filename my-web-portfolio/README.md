@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shenal's Web Portfolio
+
+A modern, responsive portfolio website built with Next.js, featuring dark/light theme toggle, GSAP animations, and EmailJS contact form integration.
+
+## Features
+
+- 🌙 Dark/Light theme toggle
+- ✨ GSAP animations and smooth transitions
+- 📱 Fully responsive design
+- 📧 Contact form with EmailJS integration
+- 🎮 Interactive OOP knowledge quiz
+- 🎨 Modern glassmorphism UI design
+
+## EmailJS Setup
+
+To enable the contact form functionality, you need to configure EmailJS:
+
+### 1. Create EmailJS Account
+1. Go to [EmailJS Dashboard](https://dashboard.emailjs.com/admin)
+2. Sign up/Login to your account
+
+### 2. Create Email Service
+1. Click "Add New Service"
+2. Choose your email provider (Gmail, Outlook, etc.)
+3. Connect your email account
+4. Note down the **Service ID** (format: `service_xxxxxxx`)
+
+### 3. Create Email Template
+1. Go to "Email Templates" in EmailJS dashboard
+2. Click "Create New Template"
+3. Use this template structure:
+```html
+Subject: New message from {{name}}
+
+Name: {{name}}
+Email: {{email}}
+Message: {{message}}
+```
+4. Note down the **Template ID** (format: `template_xxxxxxx`)
+
+### 4. Get Your Public Key
+1. Go to "Account" → "API Keys" in EmailJS dashboard
+2. Copy your **Public Key**
+
+### 5. Configure Environment Variables
+Create a `.env.local` file in the root directory with:
+```env
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id_here
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id_here
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key_here
+```
+
+### 6. Deploy to Vercel
+When deploying to Vercel, add these environment variables in your Vercel project settings:
+- Go to your Vercel project dashboard
+- Navigate to Settings → Environment Variables
+- Add the three EmailJS variables above
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up EmailJS (see instructions above)
+4. Run the development server: `npm run dev`
+5. Open [http://localhost:3000](http://localhost:3000)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Deployment
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project is optimized for deployment on Vercel:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technologies Used
 
-## Learn More
+- Next.js 15
+- React 18
+- GSAP (GreenSock)
+- Tailwind CSS
+- EmailJS
+- Framer Motion (for animations)
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License

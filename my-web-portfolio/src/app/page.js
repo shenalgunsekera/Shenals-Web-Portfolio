@@ -597,16 +597,22 @@ const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+  const [errorMessage, setErrorMessage] = useState('Something went wrong. Please try again or contact me directly.');
   const formRef = useRef();
+
+  // EmailJS Configuration - Replace these with your actual values
+  const EMAILJS_CONFIG = {
+    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_qr9iyu6',
+    templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_z70ih5p',
+    publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'bYa9JNcVpGNhyqbMV'
+  };
 
   // Initialize EmailJS
   useEffect(() => {
-    emailjs.init('bYa9JNcVpGNhyqbMV'); // Your EmailJS public key
-    
-    // Test EmailJS connection
-    console.log('EmailJS initialized');
-    console.log('EmailJS object available:', !!emailjs);
-    console.log('EmailJS methods:', Object.keys(emailjs));
+    if (typeof window !== 'undefined' && emailjs) {
+      emailjs.init(EMAILJS_CONFIG.publicKey);
+      console.log('EmailJS initialized with config:', EMAILJS_CONFIG);
+    }
   }, []);
 
   const handleInputChange = (e) => {
@@ -625,6 +631,7 @@ const ContactForm = () => {
     try {
       console.log('Starting EmailJS send...');
       console.log('Form data:', formData);
+      console.log('EmailJS config:', EMAILJS_CONFIG);
       
       // Validate form data
       if (!formData.name || !formData.email || !formData.message) {
@@ -634,6 +641,11 @@ const ContactForm = () => {
       // Validate EmailJS configuration
       if (!emailjs) {
         throw new Error('EmailJS not loaded');
+      }
+
+      // Check if EmailJS is properly configured
+      if (!EMAILJS_CONFIG.serviceId || !EMAILJS_CONFIG.templateId || !EMAILJS_CONFIG.publicKey) {
+        throw new Error('EmailJS configuration is incomplete. Please check your environment variables.');
       }
 
       console.log('EmailJS object:', emailjs);
@@ -648,12 +660,12 @@ const ContactForm = () => {
 
       console.log('Template params:', templateParams);
 
-      // Simple EmailJS call without fallback for now
+      // EmailJS call with proper error handling
       const result = await emailjs.send(
-        'service_qr9iyu6',
-        'template_z70ih5p',
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
         templateParams,
-        'bYa9JNcVpGNhyqbMV'
+        EMAILJS_CONFIG.publicKey
       );
 
       console.log('EmailJS Result:', result);
@@ -684,14 +696,18 @@ const ContactForm = () => {
       console.error('Error status:', error.status);
       console.error('Full error object:', JSON.stringify(error, null, 2));
       
-      // More specific error handling
-      if (error.message) {
-        console.error('Error message found:', error.message);
-      }
-      if (error.text) {
-        console.error('Error text found:', error.text);
+      // Show more specific error messages
+      let newErrorMessage = 'Something went wrong. Please try again or contact me directly.';
+      
+      if (error.text && error.text.includes('service ID not found')) {
+        newErrorMessage = 'Email service not configured. Please contact me directly at shenalgd@gmail.com';
+      } else if (error.text && error.text.includes('template ID not found')) {
+        newErrorMessage = 'Email template not configured. Please contact me directly at shenalgd@gmail.com';
+      } else if (error.message && error.message.includes('configuration is incomplete')) {
+        newErrorMessage = 'Email configuration incomplete. Please contact me directly at shenalgd@gmail.com';
       }
       
+      setErrorMessage(newErrorMessage);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -744,7 +760,7 @@ const ContactForm = () => {
         
         {submitStatus === 'error' && (
           <div className="error-message p-4 bg-red-500/20 border border-red-500 rounded-2xl text-red-100 text-center">
-            ❌ Something went wrong. Please try again or contact me directly.
+            ❌ {errorMessage}
           </div>
         )}
         
@@ -926,7 +942,7 @@ export default function Home() {
             <div className="about-image flex justify-center items-center">
               <div className="image-container glow-effect relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-glow-lg">
                 <Image 
-                  src="/images/bg1.png" 
+                  src="/images/bg1.jpeg" 
                   alt="Shenal Gunaskera" 
                   width={500}
                   height={500}
