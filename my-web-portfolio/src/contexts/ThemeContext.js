@@ -12,13 +12,16 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [mode, setMode] = useState('light');
+  const [mode, setMode] = useState('dark');
 
   // Initialize theme from localStorage on mount
   useEffect(() => {
     const savedMode = localStorage.getItem('theme-mode');
     if (savedMode) {
       setMode(savedMode);
+    } else {
+      // Set dark mode as default if no saved preference
+      localStorage.setItem('theme-mode', 'dark');
     }
   }, []);
 

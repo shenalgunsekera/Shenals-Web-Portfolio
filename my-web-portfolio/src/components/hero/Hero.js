@@ -30,7 +30,7 @@ const Hero = () => {
   // Set background image for .banner in dark mode
   const bannerStyle = {
     backgroundColor: mode === 'dark' ? '#1a1a1a' : '#f8f8f8',
-    backgroundImage: mode === 'dark' ? 'url(/images/dark.png.jpg)' : 'url(/images/light.png)',
+    backgroundImage: mode === 'dark' ? 'url(/images/dark.png.jpg)' : 'url(/images/light.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     transition: 'background-color 0.3s ease, background-image 0.3s ease',
@@ -58,6 +58,11 @@ const Hero = () => {
                     alt={image.alt} 
                     width={300}
                     height={300}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 200px, 300px"
+                    quality={75}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
               ))}

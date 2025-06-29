@@ -15,13 +15,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Shenal Gunaskera - Portfolio",
-  description: "Full Stack Developer & Creative Technologist",
+  title: "Shenal Gunaskera - Full Stack Developer",
+  description: "Portfolio website showcasing my work as a Full Stack Developer",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload critical images */}
+        <link rel="preload" as="image" href="/images/bg1.jpeg" />
+        <link rel="preload" as="image" href="/images/dark.png.jpg" />
+        <link rel="preload" as="image" href="/images/light.jpg" />
+        <link rel="preload" as="image" href="/images/js/1.png" />
+        <link rel="preload" as="image" href="/images/j/1.png" />
+        <link rel="preload" as="image" href="/images/t/1.png" />
+        
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://api.emailjs.com" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -200,6 +200,10 @@ const ProjectCard = ({ project, index }) => {
           width={400}
           height={300}
           className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
+          loading={index < 3 ? "eager" : "lazy"}
+          priority={index < 3}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          quality={85}
         />
         <div className="project-overlay absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
           <div className="project-info text-center text-white p-8">
@@ -304,6 +308,9 @@ const HeroSlider = () => {
                 width={300}
                 height={300}
                 className="w-full h-full object-cover transition-all duration-300 hover:brightness-110 hover:contrast-110"
+                loading="lazy"
+                sizes="(max-width: 768px) 200px, 300px"
+                quality={80}
               />
             </div>
           ))}
@@ -788,36 +795,50 @@ const ContactForm = () => {
 export default function Home() {
   const { mode } = useTheme();
   const heroRef = useRef();
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Loading effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useGSAP(() => {
+    if (isLoading) return; // Don't run animations while loading
+
     // Enhanced hero title animation with character splitting
-    const titleLines = heroRef.current.querySelectorAll('.title-line');
+    const titleLines = heroRef.current?.querySelectorAll('.title-line');
     
-    titleLines.forEach((line, lineIndex) => {
-      const chars = line.textContent.split('');
-      line.innerHTML = chars.map(char => `<span class="char">${char}</span>`).join('');
-      
-      const charElements = line.querySelectorAll('.char');
-      
-      gsap.fromTo(charElements,
-        {
-          y: 100,
-          opacity: 0,
-          rotationX: 90,
-          scale: 0
-        },
-        {
-          y: 0,
-          opacity: 1,
-          rotationX: 0,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.05,
-          delay: lineIndex * 0.3 + 0.5,
-          ease: "back.out(1.7)"
-        }
-      );
-    });
+    if (titleLines) {
+      titleLines.forEach((line, lineIndex) => {
+        const chars = line.textContent.split('');
+        line.innerHTML = chars.map(char => `<span class="char">${char}</span>`).join('');
+        
+        const charElements = line.querySelectorAll('.char');
+        
+        gsap.fromTo(charElements,
+          {
+            y: 100,
+            opacity: 0,
+            rotationX: 90,
+            scale: 0
+          },
+          {
+            y: 0,
+            opacity: 1,
+            rotationX: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.05,
+            delay: lineIndex * 0.3 + 0.5,
+            ease: "back.out(1.7)"
+          }
+        );
+      });
+    }
 
     // Enhanced subtitle animation
     gsap.fromTo('.hero-subtitle',
@@ -883,9 +904,21 @@ export default function Home() {
         });
       });
     }
-  }, { scope: heroRef });
+  }, { scope: heroRef, dependencies: [isLoading] });
 
   const skills = ["React", "Node.js", "TypeScript", "Python", "AWS", "Docker", "MongoDB", "GraphQL"];
+
+  // Loading screen
+  if (isLoading) {
+    return (
+      <div className="loading-screen fixed inset-0 bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center z-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+          <h2 className="text-2xl font-bold text-white">Loading Portfolio...</h2>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`portfolio-container ${mode} min-h-screen`}>
@@ -894,7 +927,7 @@ export default function Home() {
         <div 
           className="hero-background absolute inset-0 z-10 transition-all duration-300 filter brightness-80 contrast-110"
           style={{
-            backgroundImage: mode === 'dark' ? 'url(/images/dark.png.jpg)' : 'url(/images/light.png)',
+            backgroundImage: mode === 'dark' ? 'url(/images/dark.png.jpg)' : 'url(/images/light.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -947,6 +980,9 @@ export default function Home() {
                   width={500}
                   height={500}
                   className="w-full h-auto block transition-all duration-300 hover:scale-110"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  quality={90}
                 />
               </div>
             </div>
