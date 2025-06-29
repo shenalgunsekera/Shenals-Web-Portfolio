@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '@/contexts/ThemeContext';
 import emailjs from '@emailjs/browser';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,51 +22,13 @@ const sliderImages = [
 const projects = [
   {
     id: 1,
-    title: "Project Alpha",
-    description: "A modern web application built with React and Node.js",
-    image: "/images/js/1.png",
-    category: "Web Development",
-    link: "#"
-  },
-  {
-    id: 2,
-    title: "Project Beta",
-    description: "Mobile app for iOS and Android using React Native",
-    image: "/images/j/1.png",
-    category: "Mobile Development",
-    link: "#"
-  },
-  {
-    id: 3,
-    title: "Project Gamma",
-    description: "AI-powered data analytics platform",
-    image: "/images/t/1.png",
-    category: "AI/ML",
-    link: "#"
-  },
-  {
-    id: 4,
-    title: "Project Delta",
-    description: "E-commerce platform with advanced features",
-    image: "/images/r/1.png",
-    category: "E-commerce",
-    link: "#"
-  },
-  {
-    id: 5,
-    title: "Project Epsilon",
-    description: "Real-time collaboration tool",
-    image: "/images/c/1.png",
-    category: "Collaboration",
-    link: "#"
-  },
-  {
-    id: 6,
-    title: "Project Zeta",
-    description: "Blockchain-based decentralized application",
-    image: "/images/h/1.png",
-    category: "Blockchain",
-    link: "#"
+    title: "Simple-Navs",
+    description: "A fully customizable, responsive, and animated navigation bar for React applications",
+    image: "/images/simple navs.webp",
+    category: "React Library",
+    link: "/projects/simple-navs",
+    technologies: ["React", "TypeScript", "Framer Motion", "Styled Components", "npm"],
+    features: ["Responsive Design", "Customizable Themes", "Smooth Animations", "Accessible", "TypeScript Ready"]
   }
 ];
 
@@ -128,6 +91,7 @@ const Particles = () => {
 const ProjectCard = ({ project, index }) => {
   const cardRef = useRef();
   const { mode } = useTheme();
+  const router = useRouter();
 
   useGSAP(() => {
     // Enhanced card entrance animation
@@ -187,18 +151,26 @@ const ProjectCard = ({ project, index }) => {
     });
   }, { scope: cardRef });
 
+  const handleClick = () => {
+    if (project.link.startsWith('/')) {
+      router.push(project.link);
+    } else {
+      window.open(project.link, '_blank');
+    }
+  };
+
   return (
     <div 
       ref={cardRef}
-      className={`project-card ${mode === 'dark' ? 'dark' : 'light'} glow-effect hover-lift cursor-pointer group`}
-      onClick={() => window.open(project.link, '_blank')}
+      className={`project-card ${mode === 'dark' ? 'dark' : 'light'} glow-effect hover-lift cursor-pointer group max-w-4xl mx-auto`}
+      onClick={handleClick}
     >
       <div className="project-image relative overflow-hidden">
         <Image 
           src={project.image} 
           alt={project.title} 
-          width={400}
-          height={300}
+          width={800}
+          height={600}
           className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
           loading={index < 3 ? "eager" : "lazy"}
           priority={index < 3}
@@ -207,9 +179,16 @@ const ProjectCard = ({ project, index }) => {
         />
         <div className="project-overlay absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
           <div className="project-info text-center text-white p-8">
-            <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
-            <p className="text-lg mb-4 opacity-90">{project.description}</p>
-            <span className="category inline-block px-4 py-2 bg-white/20 rounded-full text-sm font-medium backdrop-blur-sm hover:bg-white/30 transition-all duration-300">
+            <h3 className="text-3xl font-bold mb-4">{project.title}</h3>
+            <p className="text-xl mb-6 opacity-90">{project.description}</p>
+            <div className="flex flex-wrap justify-center gap-2 mb-4">
+              {project.technologies?.map((tech, idx) => (
+                <span key={idx} className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium backdrop-blur-sm">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <span className="category inline-block px-6 py-3 bg-white/20 rounded-full text-lg font-medium backdrop-blur-sm hover:bg-white/30 transition-all duration-300">
               {project.category}
             </span>
           </div>
