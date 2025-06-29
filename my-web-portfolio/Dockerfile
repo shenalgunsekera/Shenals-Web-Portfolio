@@ -7,15 +7,15 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy package files from the my-web-portfolio directory
-COPY my-web-portfolio/package.json my-web-portfolio/package-lock.json* ./
+# Copy package files
+COPY package.json package-lock.json* ./
 RUN npm ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY my-web-portfolio/ .
+COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
