@@ -927,7 +927,9 @@ export default function Home() {
         <div 
           className="hero-background absolute inset-0 z-10 transition-all duration-300 filter brightness-80 contrast-110"
           style={{
-            backgroundImage: mode === 'dark' ? 'url(/images/dark.png.jpg)' : 'url(/images/light.jpg)',
+            backgroundImage: mode === 'dark' 
+              ? 'url(/images/dark.webp), url(/images/dark.png.jpg)' 
+              : 'url(/images/light.webp), url(/images/light.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -975,7 +977,7 @@ export default function Home() {
             <div className="about-image flex justify-center items-center">
               <div className="image-container glow-effect relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-glow-lg">
                 <Image 
-                  src="/images/bg1.jpeg" 
+                  src="/images/bg1.webp" 
                   alt="Shenal Gunaskera" 
                   width={500}
                   height={500}

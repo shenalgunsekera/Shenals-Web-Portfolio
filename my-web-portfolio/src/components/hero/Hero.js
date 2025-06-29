@@ -30,7 +30,9 @@ const Hero = () => {
   // Set background image for .banner in dark mode
   const bannerStyle = {
     backgroundColor: mode === 'dark' ? '#1a1a1a' : '#f8f8f8',
-    backgroundImage: mode === 'dark' ? 'url(/images/dark.png.jpg)' : 'url(/images/light.jpg)',
+    backgroundImage: mode === 'dark' 
+      ? 'url(/images/dark.webp), url(/images/dark.png.jpg)' 
+      : 'url(/images/light.webp), url(/images/light.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     transition: 'background-color 0.3s ease, background-image 0.3s ease',
