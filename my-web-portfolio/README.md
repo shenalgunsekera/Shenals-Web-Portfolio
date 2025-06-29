@@ -11,6 +11,50 @@ A modern, responsive portfolio website built with Next.js, featuring dark/light 
 - 🎮 Interactive OOP knowledge quiz
 - 🎨 Modern glassmorphism UI design
 
+## Image Optimization
+
+This project includes automatic WebP conversion for optimal performance. All images are automatically converted to WebP format with significant file size reductions.
+
+### Converting New Images to WebP
+
+When you add new images to the `public/images` directory, convert them to WebP format:
+
+#### Option 1: Using npm script (Recommended)
+```bash
+npm run convert-images
+```
+
+#### Option 2: Using Node.js directly
+```bash
+node convert-to-webp.js
+```
+
+#### Option 3: Using Windows batch file
+```bash
+convert-images.bat
+```
+
+### What the script does:
+- ✅ Automatically finds all images in `public/images` and subdirectories
+- ✅ Converts JPG, PNG, BMP, TIFF, GIF to WebP format
+- ✅ Resizes images to max 1920x1080px (maintains aspect ratio)
+- ✅ Optimizes quality (85%) for best balance of size and quality
+- ✅ Shows detailed conversion statistics
+- ✅ Keeps original files as fallbacks
+
+### Expected results:
+- **File size reduction**: 70-99% smaller files
+- **Loading speed**: 3-10x faster image loading
+- **Bandwidth usage**: Significantly reduced
+- **Browser support**: Automatic fallback for older browsers
+
+### Usage workflow:
+1. Add your images to `public/images/`
+2. Run `npm run convert-images`
+3. Update your code to use `.webp` files
+4. Keep original files as fallbacks
+5. Test your website performance
+
 ## EmailJS Setup
 
 To enable the contact form functionality, you need to configure EmailJS:
