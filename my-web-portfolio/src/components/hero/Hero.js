@@ -4,6 +4,7 @@
 "use client"; 
 
 import React from 'react';
+import Image from 'next/image';
 import './hero.css'; // Your CSS file for styling
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -52,7 +53,12 @@ const Hero = () => {
                 // Each individual item within the slider.
                 // We pass the --position CSS variable (1-based index).
                 <div className="item" style={{ "--position": index + 1 }} key={index}>
-                  <img src={image.src} alt={image.alt} />
+                  <Image 
+                    src={image.src} 
+                    alt={image.alt} 
+                    width={300}
+                    height={300}
+                  />
                 </div>
               ))}
             </div>

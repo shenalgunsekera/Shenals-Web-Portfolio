@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '@/contexts/ThemeContext';
 import emailjs from '@emailjs/browser';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -193,9 +194,11 @@ const ProjectCard = ({ project, index }) => {
       onClick={() => window.open(project.link, '_blank')}
     >
       <div className="project-image relative overflow-hidden">
-        <img 
+        <Image 
           src={project.image} 
           alt={project.title} 
+          width={400}
+          height={300}
           className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
         />
         <div className="project-overlay absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -295,9 +298,11 @@ const HeroSlider = () => {
               style={{ "--position": index + 1 }} 
               key={index}
             >
-              <img 
+              <Image 
                 src={image.src} 
                 alt={image.alt} 
+                width={300}
+                height={300}
                 className="w-full h-full object-cover transition-all duration-300 hover:brightness-110 hover:contrast-110"
               />
             </div>
@@ -906,7 +911,7 @@ export default function Home() {
           <div className="about-grid grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="about-text">
               <p className="text-xl leading-relaxed mb-8 transition-all duration-300 cursor-pointer hover:translate-x-2 hover:text-primary-500">
-                I'm a passionate full-stack developer with expertise in modern web technologies. 
+                I&apos;m a passionate full-stack developer with expertise in modern web technologies. 
                 I love creating beautiful, functional, and user-friendly applications that solve real-world problems.
               </p>
               <p className="text-xl leading-relaxed mb-8 transition-all duration-300 cursor-pointer hover:translate-x-2 hover:text-primary-500">
@@ -920,9 +925,11 @@ export default function Home() {
             </div>
             <div className="about-image flex justify-center items-center">
               <div className="image-container glow-effect relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-glow-lg">
-                <img 
+                <Image 
                   src="/images/bg1.png" 
                   alt="Shenal Gunaskera" 
+                  width={500}
+                  height={500}
                   className="w-full h-auto block transition-all duration-300 hover:scale-110"
                 />
               </div>
@@ -972,7 +979,7 @@ export default function Home() {
             <div className="contact-info">
               <h3 className="text-4xl mb-6 text-gradient">Let's work together</h3>
               <p className="text-xl leading-relaxed mb-8 text-gray-600 dark:text-gray-300">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
               </p>
               <div className="contact-details flex flex-col gap-6">
                 <div className="contact-item flex items-center gap-4 p-4 glass rounded-2xl cursor-pointer transition-all duration-300 hover:translate-x-2 hover:bg-white/15 hover:shadow-glow">
