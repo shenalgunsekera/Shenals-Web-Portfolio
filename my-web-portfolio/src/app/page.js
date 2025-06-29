@@ -738,7 +738,7 @@ const ContactForm = () => {
         {/* Status Messages */}
         {submitStatus === 'success' && (
           <div className="success-message p-4 bg-green-500/20 border border-green-500 rounded-2xl text-green-100 text-center">
-            ✅ Message sent successfully! I'll get back to you soon.
+            ✅ Message sent successfully! I&apos;ll get back to you soon.
           </div>
         )}
         
@@ -977,7 +977,7 @@ export default function Home() {
           </h2>
           <div className="contact-grid grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div className="contact-info">
-              <h3 className="text-4xl mb-6 text-gradient">Let's work together</h3>
+              <h3 className="text-4xl mb-6 text-gradient">Let&apos;s work together</h3>
               <p className="text-xl leading-relaxed mb-8 text-gray-600 dark:text-gray-300">
                 I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
               </p>
