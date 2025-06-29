@@ -87,8 +87,8 @@ export default function SimpleNavsProject() {
 
   return (
     <div ref={pageRef} className={`${styles.projectPage} ${mode === 'dark' ? styles.dark : ''}`}>
-      {/* Back Button */}
-      <div className="fixed top-8 left-8 z-50">
+      {/* Back Button - positioned under menu bar */}
+      <div className="fixed top-24 left-8 z-50">
         <Link href="/#work" className={`${styles.backButton}`}>
           <span className="text-xl">←</span>
           Back to Portfolio
@@ -96,43 +96,43 @@ export default function SimpleNavsProject() {
       </div>
 
       {/* Hero Section */}
-      <section className="project-hero relative min-h-screen flex items-center justify-center p-8">
+      <section className={`project-hero ${styles.projectHero}`}>
         <div className={`absolute inset-0 ${styles.bgGradientRadial}`}></div>
-        <div className="relative z-10 text-center max-w-6xl mx-auto">
-          <div className={`${styles.floatingElement} mb-8`}>
+        <div className={`relative z-10 ${styles.projectHeroContent}`}>
+          <div className={`${styles.floatingElement}`}>
             <Image 
               src="/images/simple navs.webp" 
               alt="Simple-Navs Project" 
               width={800}
               height={600}
-              className="rounded-3xl shadow-2xl mx-auto"
+              className={styles.heroImage}
               priority
-              sizes="(max-width: 768px) 100vw, 800px"
+              sizes="(max-width: 768px) 100vw, 700px"
               quality={90}
             />
           </div>
           
-          <h1 className={`text-6xl md:text-8xl font-black mb-6 ${styles.textGradient}`}>
+          <h1 className={`${styles.heroTitle} ${styles.textGradient}`}>
             Simple-Navs
           </h1>
           
-          <p className="text-2xl md:text-3xl mb-8 opacity-90 font-light">
+          <p className={styles.heroSubtitle}>
             A fully customizable, responsive, and animated navigation bar for React applications
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <span className={`px-4 py-2 ${styles.bgGradientPrimary} text-white rounded-full font-semibold`}>
+          <div className={styles.heroTags}>
+            <span className={`${styles.heroTag} ${styles.heroTagPrimary}`}>
               React Library
             </span>
-            <span className={`px-4 py-2 ${styles.glass} text-white rounded-full font-semibold`}>
+            <span className={`${styles.heroTag} ${styles.heroTagSecondary}`}>
               TypeScript
             </span>
-            <span className={`px-4 py-2 ${styles.glass} text-white rounded-full font-semibold`}>
+            <span className={`${styles.heroTag} ${styles.heroTagSecondary}`}>
               npm Package
             </span>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className={styles.heroButtons}>
             <a 
               href="https://www.npmjs.com/package/simple-navs" 
               target="_blank" 
@@ -154,16 +154,18 @@ export default function SimpleNavsProject() {
       </section>
 
       {/* Project Details */}
-      <section className="project-section py-24 px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className={`text-5xl md:text-6xl font-bold mb-16 text-center ${styles.textGradient}`}>
-            Project Overview
-          </h2>
+      <section className={`project-section ${styles.sectionSpacing}`}>
+        <div className={styles.projectSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={`text-5xl md:text-6xl font-bold ${styles.textGradient}`}>
+              Project Overview
+            </h2>
+          </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-8">
-              <div className={`${styles.glass} p-8 rounded-3xl`}>
-                <h3 className={`text-3xl font-bold mb-4 ${styles.textGradient}`}>💡 The Idea</h3>
+              <div className={`${styles.glass} p-8 rounded-3xl ${styles.contentSpacing}`}>
+                <h3 className={`text-3xl font-bold mb-6 ${styles.textGradient} ${styles.topicSpacing}`}>💡 The Idea</h3>
                 <p className="text-lg leading-relaxed">
                   I was working on personal projects and got tired of rewriting the same navbar logic every time. 
                   Existing libraries either had too many dependencies or weren't flexible enough. So I built my own 
@@ -171,9 +173,9 @@ export default function SimpleNavsProject() {
                 </p>
               </div>
               
-              <div className={`${styles.glass} p-8 rounded-3xl`}>
-                <h3 className={`text-3xl font-bold mb-4 ${styles.textGradient}`}>🎯 What Makes It Special</h3>
-                <ul className="space-y-3 text-lg">
+              <div className={`${styles.glass} p-8 rounded-3xl ${styles.contentSpacing}`}>
+                <h3 className={`text-3xl font-bold mb-6 ${styles.textGradient} ${styles.topicSpacing}`}>🎯 What Makes It Special</h3>
+                <ul className="space-y-4 text-lg">
                   <li className="flex items-center gap-3">
                     <span className="text-2xl">✅</span>
                     <span>Super customizable with solid colors, gradients, and blur effects</span>
@@ -195,27 +197,27 @@ export default function SimpleNavsProject() {
             </div>
             
             <div className="space-y-8">
-              <div className={`${styles.glass} p-8 rounded-3xl`}>
-                <h3 className={`text-3xl font-bold mb-4 ${styles.textGradient}`}>🛠 Challenges Faced</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-lg mb-2">Mobile Menu Animation</h4>
+              <div className={`${styles.glass} p-8 rounded-3xl ${styles.contentSpacing}`}>
+                <h3 className={`text-3xl font-bold mb-6 ${styles.textGradient} ${styles.topicSpacing}`}>🛠 Challenges Faced</h3>
+                <div className="space-y-6">
+                  <div className={styles.topicSpacing}>
+                    <h4 className="font-semibold text-lg mb-3">Mobile Menu Animation</h4>
                     <p className="text-gray-300">Getting the hamburger menu to animate smoothly was harder than expected. Solved with Framer Motion's layout animations.</p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-lg mb-2">Sticky Navbar Flickering</h4>
+                  <div className={styles.topicSpacing}>
+                    <h4 className="font-semibold text-lg mb-3">Sticky Navbar Flickering</h4>
                     <p className="text-gray-300">Early versions had weird flickering. Fixed by debouncing scroll events and optimizing re-renders.</p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-lg mb-2">TypeScript Gradient Types</h4>
+                  <div className={styles.topicSpacing}>
+                    <h4 className="font-semibold text-lg mb-3">TypeScript Gradient Types</h4>
                     <p className="text-gray-300">Almost gave up on gradients due to TypeScript issues. Solved with union types for strings and gradient objects.</p>
                   </div>
                 </div>
               </div>
               
-              <div className={`${styles.glass} p-8 rounded-3xl`}>
-                <h3 className={`text-3xl font-bold mb-4 ${styles.textGradient}`}>📚 Key Learnings</h3>
-                <ul className="space-y-3 text-lg">
+              <div className={`${styles.glass} p-8 rounded-3xl ${styles.contentSpacing}`}>
+                <h3 className={`text-3xl font-bold mb-6 ${styles.textGradient} ${styles.topicSpacing}`}>📚 Key Learnings</h3>
+                <ul className="space-y-4 text-lg">
                   <li className="flex items-center gap-3">
                     <span className="text-2xl">🎓</span>
                     <span>TypeScript catches bugs early and saves debugging time</span>
@@ -226,7 +228,7 @@ export default function SimpleNavsProject() {
                   </li>
                   <li className="flex items-center gap-3">
                     <span className="text-2xl">⚡</span>
-                    <span>Performance > fancy features - cut unnecessary code</span>
+                    <span>Performance &gt; fancy features - cut unnecessary code</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <span className="text-2xl">🚀</span>
@@ -240,21 +242,23 @@ export default function SimpleNavsProject() {
       </section>
 
       {/* Code Example */}
-      <section className="project-section py-24 px-8 bg-gradient-to-br from-secondary-500/5 to-primary-500/5">
-        <div className="max-w-6xl mx-auto">
-          <h2 className={`text-5xl md:text-6xl font-bold mb-16 text-center ${styles.textGradient}`}>
-            How to Use
-          </h2>
+      <section className={`project-section ${styles.sectionSpacing} bg-gradient-to-br from-secondary-500/5 to-primary-500/5`}>
+        <div className={styles.projectSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={`text-5xl md:text-6xl font-bold ${styles.textGradient}`}>
+              How to Use
+            </h2>
+          </div>
           
           <div className={`${styles.glass} p-8 rounded-3xl`}>
-            <h3 className={`text-2xl font-bold mb-6 ${styles.textGradient}`}>Installation</h3>
-            <div className={`${styles.codeBlock} mb-8`}>
+            <h3 className={`text-2xl font-bold mb-8 ${styles.textGradient} ${styles.topicSpacing}`}>Installation</h3>
+            <div className={`${styles.codeBlock} mb-12`}>
               <code className={`${styles.codeText} ${styles.installCode}`}>
                 npm install simple-navs styled-components framer-motion
               </code>
             </div>
             
-            <h3 className={`text-2xl font-bold mb-6 ${styles.textGradient}`}>Basic Usage</h3>
+            <h3 className={`text-2xl font-bold mb-8 ${styles.textGradient} ${styles.topicSpacing}`}>Basic Usage</h3>
             <div className={styles.codeBlock}>
               <pre className={styles.codeText}>
 {`import { NavBar } from "simple-navs";
@@ -281,27 +285,29 @@ function App() {
       </section>
 
       {/* Future Plans */}
-      <section className="project-section py-24 px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className={`text-5xl md:text-6xl font-bold mb-16 ${styles.textGradient}`}>
-            What's Next?
-          </h2>
+      <section className={`project-section ${styles.sectionSpacing}`}>
+        <div className={styles.projectSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={`text-5xl md:text-6xl font-bold ${styles.textGradient}`}>
+              What's Next?
+            </h2>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className={`${styles.glass} p-8 rounded-3xl`}>
-              <div className="text-4xl mb-4">📋</div>
+            <div className={`${styles.glass} p-8 rounded-3xl ${styles.contentSpacing}`}>
+              <div className="text-4xl mb-6">📋</div>
               <h3 className="text-2xl font-bold mb-4">Dropdown Menus</h3>
               <p className="text-lg">Adding support for nested navigation with smooth dropdown animations</p>
             </div>
             
-            <div className={`${styles.glass} p-8 rounded-3xl`}>
-              <div className="text-4xl mb-4">🌙</div>
+            <div className={`${styles.glass} p-8 rounded-3xl ${styles.contentSpacing}`}>
+              <div className="text-4xl mb-6">🌙</div>
               <h3 className="text-2xl font-bold mb-4">Dark/Light Mode</h3>
               <p className="text-lg">Built-in theme toggle with automatic system preference detection</p>
             </div>
             
-            <div className={`${styles.glass} p-8 rounded-3xl`}>
-              <div className="text-4xl mb-4">🎬</div>
+            <div className={`${styles.glass} p-8 rounded-3xl ${styles.contentSpacing}`}>
+              <div className="text-4xl mb-6">🎬</div>
               <h3 className="text-2xl font-bold mb-4">Animation Presets</h3>
               <p className="text-lg">More animation options and presets for different use cases</p>
             </div>
@@ -310,14 +316,16 @@ function App() {
       </section>
 
       {/* Call to Action */}
-      <section className="project-section py-24 px-8 bg-gradient-to-br from-primary-500/10 to-secondary-500/10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className={`text-5xl md:text-6xl font-bold mb-8 ${styles.textGradient}`}>
-            Try Simple-Navs Today!
-          </h2>
-          <p className="text-xl mb-12 opacity-90">
-            Join hundreds of developers who are already using Simple-Navs in their projects
-          </p>
+      <section className={`project-section ${styles.sectionSpacingSmall} bg-gradient-to-br from-primary-500/10 to-secondary-500/10`}>
+        <div className={styles.centeredContent}>
+          <div className={styles.sectionHeader}>
+            <h2 className={`text-5xl md:text-6xl font-bold ${styles.textGradient}`}>
+              Try Simple-Navs Today!
+            </h2>
+            <p className="text-xl opacity-90">
+              Join hundreds of developers who are already using Simple-Navs in their projects
+            </p>
+          </div>
           
           <div className="flex flex-wrap justify-center gap-6">
             <a 
