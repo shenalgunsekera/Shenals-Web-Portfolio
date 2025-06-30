@@ -4,6 +4,7 @@ import './menu.css';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useTheme } from '@/contexts/ThemeContext';
+import Link from 'next/link';
 
 const menuLinks = [
   { path: '/', label: "Home" },
@@ -25,19 +26,30 @@ const Menu = () => {
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
+    // Emit custom event for menu state
+    window.dispatchEvent(new CustomEvent('menuToggle', { detail: !isMenuOpen }));
   };
 
   const handleLinkClick = (path) => {
     setIsMenuOpen(false);
-    // Extract the ID from the path (e.g., '/#game' becomes '#game')
-    const id = path.includes('#') ? path.split('#')[1] : path.replace('/', '');
-    const selector = id ? `#${id}` : '#home';
-    const element = document.querySelector(selector);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+    // Emit custom event for menu state
+    window.dispatchEvent(new CustomEvent('menuToggle', { detail: false }));
+    if (path === '/') {
+      // Use Next.js navigation for Home
+      window.location.href = '/';
+      return;
+    }
+    // Only scroll for hash links
+    if (path.startsWith('/#')) {
+      const id = path.split('#')[1];
+      const selector = id ? `#${id}` : '#home';
+      const element = document.querySelector(selector);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
   };
 

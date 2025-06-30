@@ -44,7 +44,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  z-index: 30;
+  z-index: 9999;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -145,7 +145,7 @@ body.dark-mode .mode-toggle {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 20;
+  z-index: 9999;
   background: var(--menu-overlay-background);
   display: flex;
   flex-direction: column;

@@ -14,12 +14,23 @@ export default function SimpleNavsProject() {
   const { mode } = useTheme();
   const pageRef = useRef();
   const [isLoading, setIsLoading] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-    return () => clearTimeout(timer);
+    
+    const handleMenuToggle = (e) => {
+      setMenuOpen(e.detail);
+    };
+    
+    window.addEventListener('menuToggle', handleMenuToggle);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('menuToggle', handleMenuToggle);
+    };
   }, []);
 
   useGSAP(() => {
@@ -88,12 +99,14 @@ export default function SimpleNavsProject() {
   return (
     <div ref={pageRef} className={`${styles.projectPage} ${mode === 'dark' ? styles.dark : ''}`}>
       {/* Back Button - positioned under menu bar */}
-      <div className="fixed top-24 left-8 z-50">
-        <Link href="/#work" className={`${styles.backButton}`}>
-          <span className="text-xl">←</span>
-          Back to Portfolio
-        </Link>
-      </div>
+      {!menuOpen && (
+        <div className="fixed top-24 left-8">
+          <Link href="/#work" className={`${styles.backButton}`}>
+            <span className="text-xl">←</span>
+            Back to Portfolio
+          </Link>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className={`project-hero ${styles.projectHero}`}>

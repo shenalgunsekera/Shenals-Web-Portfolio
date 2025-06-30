@@ -8,6 +8,7 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .projectSection {
@@ -16,6 +17,7 @@
   margin: 0 auto;
   padding: 0 2rem;
   box-sizing: border-box;
+  overflow: visible;
 }
 
 /* Hero section specific styles */
@@ -28,6 +30,7 @@
   padding: 4rem 2rem;
   box-sizing: border-box;
   position: relative;
+  overflow: hidden;
 }
 
 .projectHeroContent {
@@ -214,7 +217,6 @@
   position: fixed;
   top: 6rem;
   left: 2rem;
-  z-index: 1000;
   box-sizing: border-box;
 }
 
